@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Ambient Piano",
+        "artist": "Relaxify",
+        "genre": "Classical",
+        "duration": 180,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "image_url": "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+    },
+    {
+        "title": "Summer Vibes",
+        "artist": "Sunny Beats",
+        "genre": "Pop",
+        "duration": 210,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "image_url": "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+    },
+    {
+        "title": "Night Drive",
+        "artist": "Synthwave Boy",
+        "genre": "Electronic",
+        "duration": 240,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+        "image_url": "https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+    }
+]
