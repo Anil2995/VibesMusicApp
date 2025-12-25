@@ -1,27 +1,213 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
+/* ============================================
+   VIBES MUSIC PLAYER - SPOTIFY-INSPIRED THEME
+   Premium Design with Spotify Green
+   ============================================ */
 
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
+:root {
+  /* Spotify-Inspired Color Palette */
+  --spotify-green: #1DB954;
+  --spotify-green-light: #1ed760;
+  --spotify-green-dark: #169c46;
+  --spotify-black: #121212;
+  --spotify-dark-gray: #181818;
+  --spotify-gray: #282828;
+  --spotify-light-gray: #b3b3b3;
+  --spotify-white: #ffffff;
 
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+  /* Accent Colors */
+  --accent-pink: #e91e63;
+  --accent-purple: #9b59b6;
+  --accent-blue: #3498db;
+  --accent-orange: #ff6b35;
 
+  /* Gradients */
+  --gradient-green: linear-gradient(135deg, #1DB954 0%, #169c46 100%);
+  --gradient-dark: linear-gradient(180deg, #282828 0%, #121212 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(29, 185, 84, 0.3) 0%, rgba(18, 18, 18, 0.95) 100%);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Circular Std', 'Spotify Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background-color: var(--spotify-black);
+  color: var(--spotify-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar - Spotify Style */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Hide scrollbar for cleaner look */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes pulse-glow {
+
+  0%,
   100% {
-    transform: translate(0px, 0px) scale(1);
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(29, 185, 84, 0.6);
   }
 }
 
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes equalizer {
+
+  0%,
+  100% {
+    height: 10%;
+  }
+
+  50% {
+    height: 100%;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes blob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(20px, -30px) scale(1.1);
+  }
+
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  75% {
+    transform: translate(30px, 10px) scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+
+/* Animation Classes */
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 15s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 .animation-delay-2000 {
@@ -32,9 +218,503 @@
   animation-delay: 4s;
 }
 
-body {
-  background-color: #020617;
-  /* slate-950 */
-  color: #f8fafc;
-  /* slate-50 */
+/* ============================================
+   SPOTIFY-STYLE COMPONENTS
+   ============================================ */
+
+/* Spotify Green Button */
+.btn-spotify {
+  background-color: var(--spotify-green);
+  color: var(--spotify-black);
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 500px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+}
+
+.btn-spotify:hover {
+  background-color: var(--spotify-green-light);
+  transform: scale(1.04);
+}
+
+.btn-spotify:active {
+  transform: scale(0.98);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: transparent;
+  color: var(--spotify-white);
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.btn-secondary:hover {
+  border-color: var(--spotify-white);
+  transform: scale(1.04);
+}
+
+/* Card Styles */
+.spotify-card {
+  background: var(--spotify-gray);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.spotify-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Play Button Overlay */
+.play-button {
+  width: 48px;
+  height: 48px;
+  background-color: var(--spotify-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+}
+
+.spotify-card:hover .play-button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.play-button:hover {
+  transform: scale(1.06);
+  background-color: var(--spotify-green-light);
+}
+
+/* Green Accent Text */
+.text-spotify {
+  color: var(--spotify-green);
+}
+
+/* Green Gradient Text */
+.text-gradient-green {
+  background: linear-gradient(135deg, var(--spotify-green), var(--spotify-green-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   GLASSMORPHISM - SPOTIFY STYLE
+   ============================================ */
+
+.glass {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(40, 40, 40, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+/* ============================================
+   NAVIGATION & SIDEBAR
+   ============================================ */
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  color: var(--spotify-light-gray);
+  font-weight: 700;
+  font-size: 14px;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--spotify-white);
+}
+
+.nav-link.active {
+  color: var(--spotify-white);
+}
+
+/* ============================================
+   TRACK & PLAYLIST CARDS
+   ============================================ */
+
+.track-row {
+  display: grid;
+  grid-template-columns: 16px 4fr 3fr 1fr;
+  gap: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: var(--spotify-light-gray);
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.track-row:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.track-row:hover .track-number {
+  display: none;
+}
+
+.track-row:hover .track-play-icon {
+  display: block;
+}
+
+/* ============================================
+   PROGRESS BAR - SPOTIFY STYLE
+   ============================================ */
+
+.progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress-bar:hover {
+  height: 6px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--spotify-white);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.progress-bar:hover .progress-bar-fill {
+  background: var(--spotify-green);
+}
+
+.progress-bar-knob {
+  width: 12px;
+  height: 12px;
+  background: var(--spotify-white);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar:hover .progress-bar-knob {
+  opacity: 1;
+}
+
+/* ============================================
+   VOLUME SLIDER
+   ============================================ */
+
+.volume-slider {
+  width: 93px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.volume-slider:hover {
+  height: 6px;
+}
+
+/* ============================================
+   SKELETON LOADING
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(90deg, var(--spotify-gray) 25%, rgba(255, 255, 255, 0.1) 50%, var(--spotify-gray) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-card {
+  background: var(--spotify-gray);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  width: 60%;
+}
+
+/* ============================================
+   EQUALIZER ANIMATION
+   ============================================ */
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.equalizer-bar {
+  width: 3px;
+  background: var(--spotify-green);
+  border-radius: 1px;
+  animation: wave 0.5s ease-in-out infinite;
+}
+
+.equalizer-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.equalizer-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.equalizer-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.equalizer-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.equalizer-bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* ============================================
+   HOVER EFFECTS
+   ============================================ */
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-brightness {
+  transition: filter 0.2s ease;
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(29, 185, 84, 0.4);
+}
+
+/* ============================================
+   GENRE PILLS / CHIPS
+   ============================================ */
+
+.genre-pill {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 500px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--spotify-white);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.genre-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.genre-pill.active {
+  background: var(--spotify-green);
+  color: var(--spotify-black);
+}
+
+/* ============================================
+   FEATURED PLAYLIST HEADER
+   ============================================ */
+
+.playlist-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 24px;
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+.playlist-cover {
+  width: 232px;
+  height: 232px;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+/* ============================================
+   NOW PLAYING BAR
+   ============================================ */
+
+.now-playing-bar {
+  height: 90px;
+  background: var(--spotify-dark-gray);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  padding: 0 16px;
+}
+
+/* ============================================
+   TOOLTIP
+   ============================================ */
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: var(--spotify-gray);
+  color: var(--spotify-white);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .now-playing-bar {
+    height: 70px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .playlist-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .playlist-cover {
+    width: 160px;
+    height: 160px;
+  }
+
+  .track-row {
+    grid-template-columns: 16px 1fr 60px;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.spotify-bg {
+  background-color: var(--spotify-black);
+}
+
+.spotify-card-bg {
+  background-color: var(--spotify-gray);
+}
+
+/* Album Art Vinyl Effect */
+.vinyl-effect {
+  position: relative;
+}
+
+.vinyl-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.3) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Like Button Animation */
+.like-button {
+  transition: transform 0.1s ease;
+}
+
+.like-button:active {
+  transform: scale(1.3);
+}
+
+.like-button.liked {
+  color: var(--spotify-green);
 }

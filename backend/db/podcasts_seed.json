@@ -1,0 +1,168 @@
+[
+    {
+        "title": "Tech Talk Daily",
+        "host": "Alex Thompson",
+        "description": "Your daily dose of tech news, updates, and insightful discussions about the latest in technology, AI, and software development.",
+        "category": "Technology",
+        "image_url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&auto=format&fit=crop&q=60",
+        "episodes": [
+            {
+                "title": "The Future of AI in 2024",
+                "description": "Exploring how AI will shape our lives and work in the coming year",
+                "duration": 1845,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                "episode_number": 1
+            },
+            {
+                "title": "Web Development Trends",
+                "description": "Latest frameworks and tools that are changing the web landscape",
+                "duration": 2100,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                "episode_number": 2
+            },
+            {
+                "title": "Cybersecurity Essentials",
+                "description": "Protecting yourself and your business in the digital age",
+                "duration": 1920,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                "episode_number": 3
+            }
+        ]
+    },
+    {
+        "title": "Mindful Moments",
+        "host": "Sarah Chen",
+        "description": "A meditation and wellness podcast to help you find peace, clarity, and balance in your daily life.",
+        "category": "Wellness",
+        "image_url": "https://images.unsplash.com/photo-1545389336-cf090694435e?w=500&auto=format&fit=crop&q=60",
+        "episodes": [
+            {
+                "title": "Morning Meditation Guide",
+                "description": "Start your day with clarity and positive energy",
+                "duration": 1200,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                "episode_number": 1
+            },
+            {
+                "title": "Stress Relief Techniques",
+                "description": "Practical methods to reduce anxiety and find calm",
+                "duration": 1500,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                "episode_number": 2
+            },
+            {
+                "title": "Sleep Better Tonight",
+                "description": "Guided relaxation for deeper, more restful sleep",
+                "duration": 1800,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                "episode_number": 3
+            }
+        ]
+    },
+    {
+        "title": "Business Builders",
+        "host": "Marcus Johnson",
+        "description": "Interviews with successful entrepreneurs and business insights to help you build and grow your own venture.",
+        "category": "Business",
+        "image_url": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&auto=format&fit=crop&q=60",
+        "episodes": [
+            {
+                "title": "From Startup to Success",
+                "description": "Key lessons from founders who made it big",
+                "duration": 2400,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                "episode_number": 1
+            },
+            {
+                "title": "Marketing on a Budget",
+                "description": "How to grow your brand without breaking the bank",
+                "duration": 1980,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+                "episode_number": 2
+            },
+            {
+                "title": "Team Building Secrets",
+                "description": "Creating a culture that attracts and retains top talent",
+                "duration": 2200,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+                "episode_number": 3
+            }
+        ]
+    },
+    {
+        "title": "Music Production Academy",
+        "host": "DJ Phoenix",
+        "description": "Learn the art of music production, from beat-making to mastering, with tips from industry professionals.",
+        "category": "Music",
+        "image_url": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&auto=format&fit=crop&q=60",
+        "episodes": [
+            {
+                "title": "Beat Making 101",
+                "description": "Getting started with creating your first beats",
+                "duration": 1650,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+                "episode_number": 1
+            },
+            {
+                "title": "Mixing Like a Pro",
+                "description": "Professional mixing techniques for crystal clear sound",
+                "duration": 2100,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
+                "episode_number": 2
+            },
+            {
+                "title": "Mastering Fundamentals",
+                "description": "The final touch to make your tracks radio-ready",
+                "duration": 1800,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
+                "episode_number": 3
+            }
+        ]
+    },
+    {
+        "title": "Comedy Central Live",
+        "host": "Mike & Jessica",
+        "description": "Hilarious conversations, funny stories, and the best comedy sketches to brighten your day.",
+        "category": "Comedy",
+        "image_url": "https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=500&auto=format&fit=crop&q=60",
+        "episodes": [
+            {
+                "title": "Office Fails Compilation",
+                "description": "The funniest workplace mishaps and stories",
+                "duration": 1500,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                "episode_number": 1
+            },
+            {
+                "title": "Dating Disasters",
+                "description": "Cringe-worthy but hilarious dating stories from listeners",
+                "duration": 1800,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                "episode_number": 2
+            }
+        ]
+    },
+    {
+        "title": "True Crime Files",
+        "host": "Detective noir",
+        "description": "Deep dives into mysterious cases, unsolved crimes, and the stories behind them.",
+        "category": "True Crime",
+        "image_url": "https://images.unsplash.com/photo-1453873531674-2151bcd01707?w=500&auto=format&fit=crop&q=60",
+        "episodes": [
+            {
+                "title": "The Vanishing Act",
+                "description": "A person disappears without a trace - what happened?",
+                "duration": 2700,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                "episode_number": 1
+            },
+            {
+                "title": "Cold Case Chronicles",
+                "description": "Revisiting cases that went cold decades ago",
+                "duration": 2400,
+                "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                "episode_number": 2
+            }
+        ]
+    }
+]

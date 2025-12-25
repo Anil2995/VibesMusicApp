@@ -1,10 +1,11 @@
 # Dependencies
 node_modules/
 
-# Environment variables
+# Environment files
 .env
 .env.local
-.env.*.local
+.env.production
+*.env
 
 # Build outputs
 dist/
@@ -13,6 +14,8 @@ build/
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS files
 .DS_Store
@@ -22,5 +25,10 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Cache
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
 .cache/

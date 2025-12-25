@@ -1,26 +1,218 @@
 [
     {
-        "title": "Ambient Piano",
-        "artist": "Relaxify",
-        "genre": "Classical",
-        "duration": 180,
-        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        "image_url": "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-    },
-    {
-        "title": "Summer Vibes",
-        "artist": "Sunny Beats",
+        "title": "Shape of You",
+        "artist": "Ed Sheeran",
+        "album": "÷ (Divide)",
         "genre": "Pop",
-        "duration": 210,
-        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-        "image_url": "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        "duration": 234,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "image_url": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300"
     },
     {
-        "title": "Night Drive",
-        "artist": "Synthwave Boy",
+        "title": "Blinding Lights",
+        "artist": "The Weeknd",
+        "album": "After Hours",
+        "genre": "Pop",
+        "duration": 200,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "image_url": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300"
+    },
+    {
+        "title": "Starboy",
+        "artist": "The Weeknd ft. Daft Punk",
+        "album": "Starboy",
         "genre": "Electronic",
-        "duration": 240,
+        "duration": 230,
         "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-        "image_url": "https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        "image_url": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300"
+    },
+    {
+        "title": "Levitating",
+        "artist": "Dua Lipa",
+        "album": "Future Nostalgia",
+        "genre": "Pop",
+        "duration": 203,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+        "image_url": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=300"
+    },
+    {
+        "title": "Don't Start Now",
+        "artist": "Dua Lipa",
+        "album": "Future Nostalgia",
+        "genre": "Pop",
+        "duration": 183,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+        "image_url": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300"
+    },
+    {
+        "title": "Stay",
+        "artist": "The Kid LAROI & Justin Bieber",
+        "album": "F*ck Love 3",
+        "genre": "Pop",
+        "duration": 141,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+        "image_url": "https://images.unsplash.com/photo-1484876065684-b683cf17d276?w=300"
+    },
+    {
+        "title": "Heat Waves",
+        "artist": "Glass Animals",
+        "album": "Dreamland",
+        "genre": "Alternative",
+        "duration": 239,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+        "image_url": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300"
+    },
+    {
+        "title": "Bad Guy",
+        "artist": "Billie Eilish",
+        "album": "When We All Fall Asleep",
+        "genre": "Pop",
+        "duration": 194,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+        "image_url": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300"
+    },
+    {
+        "title": "Butter",
+        "artist": "BTS",
+        "album": "Butter",
+        "genre": "K-Pop",
+        "duration": 165,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+        "image_url": "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=300"
+    },
+    {
+        "title": "Dynamite",
+        "artist": "BTS",
+        "album": "BE",
+        "genre": "K-Pop",
+        "duration": 199,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+        "image_url": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300"
+    },
+    {
+        "title": "Peaches",
+        "artist": "Justin Bieber",
+        "album": "Justice",
+        "genre": "R&B",
+        "duration": 198,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
+        "image_url": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=300"
+    },
+    {
+        "title": "Montero",
+        "artist": "Lil Nas X",
+        "album": "MONTERO",
+        "genre": "Hip-Hop",
+        "duration": 137,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
+        "image_url": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=300"
+    },
+    {
+        "title": "Deja Vu",
+        "artist": "Olivia Rodrigo",
+        "album": "SOUR",
+        "genre": "Pop",
+        "duration": 215,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
+        "image_url": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300"
+    },
+    {
+        "title": "Good 4 U",
+        "artist": "Olivia Rodrigo",
+        "album": "SOUR",
+        "genre": "Pop Rock",
+        "duration": 178,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
+        "image_url": "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=300"
+    },
+    {
+        "title": "Save Your Tears",
+        "artist": "The Weeknd",
+        "album": "After Hours",
+        "genre": "Pop",
+        "duration": 215,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
+        "image_url": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300"
+    },
+    {
+        "title": "Kiss Me More",
+        "artist": "Doja Cat ft. SZA",
+        "album": "Planet Her",
+        "genre": "R&B",
+        "duration": 208,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
+        "image_url": "https://images.unsplash.com/photo-1446329360995-b4642a139973?w=300"
+    },
+    {
+        "title": "Industry Baby",
+        "artist": "Lil Nas X & Jack Harlow",
+        "album": "MONTERO",
+        "genre": "Hip-Hop",
+        "duration": 212,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "image_url": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300"
+    },
+    {
+        "title": "Easy On Me",
+        "artist": "Adele",
+        "album": "30",
+        "genre": "Soul",
+        "duration": 224,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "image_url": "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=300"
+    },
+    {
+        "title": "Shivers",
+        "artist": "Ed Sheeran",
+        "album": "=",
+        "genre": "Pop",
+        "duration": 207,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+        "image_url": "https://images.unsplash.com/photo-1484876065684-b683cf17d276?w=300"
+    },
+    {
+        "title": "Woman",
+        "artist": "Doja Cat",
+        "album": "Planet Her",
+        "genre": "Pop",
+        "duration": 173,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+        "image_url": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300"
+    },
+    {
+        "title": "Happier Than Ever",
+        "artist": "Billie Eilish",
+        "album": "Happier Than Ever",
+        "genre": "Alternative",
+        "duration": 298,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+        "image_url": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300"
+    },
+    {
+        "title": "Take My Breath",
+        "artist": "The Weeknd",
+        "album": "Dawn FM",
+        "genre": "Electronic",
+        "duration": 219,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+        "image_url": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300"
+    },
+    {
+        "title": "Rockin'",
+        "artist": "The Weeknd",
+        "album": "Dawn FM",
+        "genre": "Pop",
+        "duration": 209,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+        "image_url": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300"
+    },
+    {
+        "title": "Cold Heart",
+        "artist": "Elton John & Dua Lipa",
+        "album": "The Lockdown Sessions",
+        "genre": "Pop",
+        "duration": 203,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+        "image_url": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300"
     }
 ]

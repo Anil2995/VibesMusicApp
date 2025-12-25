@@ -15,68 +15,80 @@ const TrackCard = ({ track, index, onPlay, isPlaying }) => {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.02, y: -5 }}
-            className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/10"
+            transition={{ delay: index * 0.03, duration: 0.3 }}
+            className="group cursor-pointer bg-[#181818] hover:bg-[#282828] rounded-lg p-4 transition-all duration-300"
+            onClick={() => onPlay(track)}
         >
-            {/* Cover Image */}
-            <div className="relative aspect-square overflow-hidden">
+            {/* Album Art */}
+            <div className="relative aspect-square rounded-md overflow-hidden mb-4 shadow-lg">
                 <img
-                    src={track.image_url || 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=500'}
+                    src={track.image_url}
                     alt={track.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
                 />
 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Play Button */}
-                <motion.button
-                    onClick={(e) => { e.stopPropagation(); onPlay(track); }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/30 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+                {/* Play Button - Spotify Style */}
+                <motion.div
+                    className={`absolute bottom-2 right-2 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 ${isPlaying
+                            ? 'bg-[#1DB954] opacity-100 translate-y-0'
+                            : 'bg-[#1DB954] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0'
+                        }`}
+                    whileHover={{ scale: 1.06 }}
                 >
                     {isPlaying ? (
-                        <Pause className="w-5 h-5 text-white fill-white" />
+                        <Pause className="w-5 h-5 text-black fill-black" />
                     ) : (
-                        <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+                        <Play className="w-5 h-5 text-black fill-black ml-0.5" />
                     )}
-                </motion.button>
+                </motion.div>
 
                 {/* Like Button */}
                 <motion.button
-                    onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
-                    className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsLiked(!isLiked);
+                    }}
+                    className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm transition-all duration-300 ${isLiked
+                            ? 'bg-[#1DB954]/80 opacity-100'
+                            : 'bg-black/60 opacity-0 group-hover:opacity-100'
+                        }`}
                 >
-                    <Heart
-                        className={`w-6 h-6 transition-colors ${isLiked ? 'text-pink-500 fill-pink-500' : 'text-white/70 hover:text-pink-400'}`}
-                    />
+                    <Heart className={`w-4 h-4 transition-colors ${isLiked ? 'text-white fill-white' : 'text-white'
+                        }`} />
                 </motion.button>
+
+                {/* Playing Indicator */}
+                {isPlaying && (
+                    <div className="absolute top-2 left-2 flex items-end gap-0.5 h-4 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
+                        {[...Array(4)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="w-0.5 bg-[#1DB954] rounded-full"
+                                animate={{ height: ['40%', '100%', '40%'] }}
+                                transition={{
+                                    duration: 0.5,
+                                    repeat: Infinity,
+                                    delay: i * 0.1,
+                                }}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* Track Info */}
-            <div className="p-4">
-                <h3 className="font-semibold text-white truncate mb-1 group-hover:text-purple-300 transition-colors">
+            <div>
+                <h3 className={`font-bold text-sm truncate transition-colors ${isPlaying ? 'text-[#1DB954]' : 'text-white'
+                    }`}>
                     {track.title}
                 </h3>
-                <p className="text-sm text-gray-400 truncate mb-2">
+                <p className="text-sm text-[#b3b3b3] truncate mt-1">
                     {track.artist}
                 </p>
-                <div className="flex items-center justify-between">
-                    <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">
-                        {track.genre || 'Music'}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                        {formatDuration(track.duration || 0)}
-                    </span>
-                </div>
             </div>
-
-            {/* Glow Effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-purple-500/5 group-hover:via-transparent group-hover:to-pink-500/5 transition-all duration-500 pointer-events-none" />
         </motion.div>
     );
 };
