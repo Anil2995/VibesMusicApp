@@ -18,11 +18,11 @@
 
 <div align="center">
 
-### 🎵 **[Open Vibes Music App](https://vibes-music-app-anil2995.vercel.app/)** 🎵
+### 🎵 **[Open Vibes Music App](https://vibes-music-app-frontend.vercel.app/)** 🎵
 
 | Service | URL | Status |
 |---------|-----|--------|
-| 🌐 **Frontend** | [vibes-music-app-anil2995.vercel.app](https://vibes-music-app-anil2995.vercel.app/) | ✅ Live |
+| 🌐 **Frontend** | [vibes-music-app-frontend.vercel.app](https://vibes-music-app-frontend.vercel.app/) | ✅ Live |
 | ⚙️ **Backend API** | [vibes-music-api.onrender.com](https://vibes-music-api.onrender.com/) | ✅ Live |
 | 🗄️ **Database** | Supabase PostgreSQL | ✅ Connected |
 
