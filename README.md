@@ -14,6 +14,24 @@
 
 ---
 
+## 🚀 Live Demo
+
+<div align="center">
+
+### 🎵 **[Open Vibes Music App](https://vibes-music-app-anil2995.vercel.app/)** 🎵
+
+| Service | URL | Status |
+|---------|-----|--------|
+| 🌐 **Frontend** | [vibes-music-app-anil2995.vercel.app](https://vibes-music-app-anil2995.vercel.app/) | ✅ Live |
+| ⚙️ **Backend API** | [vibes-music-api.onrender.com](https://vibes-music-api.onrender.com/) | ✅ Live |
+| 🗄️ **Database** | Supabase PostgreSQL | ✅ Connected |
+
+</div>
+
+> **Note:** The backend is hosted on Render's free tier, so the first request may take ~30 seconds to wake up the server.
+
+---
+
 ## 📌 Project Overview
 
 **Vibes Music Player** is a full-stack digital media streaming application that allows users to stream music and podcasts, manage playlists, and enjoy a modern audio player experience similar to Spotify Lite.
@@ -182,7 +200,7 @@ VibesMusicApp/
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/yourusername/VibesMusicApp.git
+git clone https://github.com/Anil2995/VibesMusicApp.git
 cd VibesMusicApp
 ```
 
@@ -249,7 +267,7 @@ Visit [http://localhost:5173](http://localhost:5173) in your browser!
 ### Base URL
 ```
 Development: http://localhost:5000/api
-Production: https://your-backend.onrender.com/api
+Production: https://vibes-music-api.onrender.com/api
 ```
 
 ### Endpoints
