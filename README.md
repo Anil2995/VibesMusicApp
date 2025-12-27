@@ -78,6 +78,8 @@ To design and develop a production-ready music streaming web application demonst
 | **Framer Motion** | Smooth animations |
 | **React Router 7** | Client-side routing |
 | **Lucide React** | Modern icon library |
+| **Web Audio API** | Real-time audio waveform visualization |
+| **WebGL Shaders** | Animated background effects |
 
 ### Backend
 | Technology | Purpose |
@@ -137,9 +139,12 @@ VibesMusicApp/
 ├── frontend/                    # React Frontend
 │   ├── src/
 │   │   ├── components/          # Reusable UI components
-│   │   │   ├── MusicPlayer.jsx  # Audio player with controls
+│   │   │   ├── MusicPlayer.jsx  # Audio player with controls & waveform
 │   │   │   ├── Sidebar.jsx      # Navigation sidebar
-│   │   │   └── TrackCard.jsx    # Track display cards
+│   │   │   ├── TrackCard.jsx    # Track display cards
+│   │   │   └── ui/              # UI components
+│   │   │       ├── Waveform.jsx     # Real-time waveform visualization
+│   │   │       └── ShaderBackground.jsx # WebGL animated background
 │   │   ├── pages/               # Page components
 │   │   │   ├── Home.jsx         # Home page with tracks
 │   │   │   ├── Search.jsx       # Search functionality
@@ -407,11 +412,13 @@ VITE_API_URL=http://localhost:5000/api
 - Genre filtering and search
 
 ### Music Player
-- Fixed bottom player bar
-- Play/Pause, Skip, Shuffle controls
+- Fixed bottom player bar with mini waveform visualization
+- Play/Pause, Skip, Shuffle, Repeat controls
 - Progress bar with seek functionality
-- Volume control
-- Full-screen expanded view
+- Volume control with mute toggle
+- Full-screen expanded view with large waveform
+- Real-time audio frequency visualization using Web Audio API
+- Multiple color schemes (Spotify green, purple, blue, rainbow)
 
 ### Library
 - User playlists
@@ -441,12 +448,27 @@ VITE_API_URL=http://localhost:5000/api
 ---
 
 ## 🔮 Future Enhancements
-- [ ] Audio waveform visualization
+- [x] Audio waveform visualization ✅ (Completed!)
 - [ ] AI-powered recommendations
 - [ ] Social features (follow, share)
 - [ ] Offline mode with Service Workers
 - [ ] Desktop app with Electron
 - [ ] Mobile app with React Native
+
+---
+
+## 🙏 Credits & Inspirations
+
+### Waveform Visualization
+The audio waveform visualization feature was inspired by and adapted from:
+- [J-Viral/waveform-demo-2](https://github.com/J-Viral/waveform-demo-2) - Music Player with Waveform Visualization
+- [J-Viral/waveform-demo](https://github.com/J-Viral/waveform-demo) - Next.js Waveform Demo
+
+These repositories provided excellent examples of:
+- Web Audio API frequency analysis
+- SVG-based animated waveform bars
+- WebGL shader background effects
+- Real-time audio visualization techniques
 
 ---
 

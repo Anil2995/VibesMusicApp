@@ -3,6 +3,9 @@ const supabase = require('../config/supabaseClient');
 // Get all tracks
 exports.getAllTracks = async (req, res) => {
     try {
+        if (!supabase) {
+            throw new Error('Database connection not available');
+        }
         const { data, error } = await supabase
             .from('tracks')
             .select('*')
@@ -12,6 +15,7 @@ exports.getAllTracks = async (req, res) => {
 
         res.status(200).json(data);
     } catch (err) {
+        console.error('getAllTracks error:', err.message);
         res.status(500).json({ error: err.message });
     }
 };

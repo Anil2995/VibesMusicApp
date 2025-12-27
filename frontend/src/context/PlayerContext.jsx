@@ -191,6 +191,9 @@ export const PlayerProvider = ({ children }) => {
         isShuffled,
         repeatMode,
 
+        // Refs
+        audioRef,
+
         // Actions
         playTrack,
         togglePlay,

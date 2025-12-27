@@ -21,6 +21,8 @@ import {
     Radio
 } from 'lucide-react';
 import { useState } from 'react';
+import Waveform from './ui/Waveform';
+import ShaderBackground from './ui/ShaderBackground';
 
 const MusicPlayer = () => {
     const {
@@ -42,7 +44,8 @@ const MusicPlayer = () => {
         toggleShuffle,
         cycleRepeatMode,
         formatTime,
-        playTrack
+        playTrack,
+        audioRef
     } = usePlayer();
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -92,17 +95,32 @@ const MusicPlayer = () => {
                         exit={{ y: 100, opacity: 0 }}
                         className="fixed bottom-0 left-0 right-0 z-50"
                     >
-                        <div
-                            className="h-1 bg-[#4d4d4d] cursor-pointer group relative"
-                            onClick={handleProgressClick}
-                        >
-                            <motion.div
-                                className="h-full bg-white group-hover:bg-[#1DB954] relative transition-colors"
-                                style={{ width: `${progress}%` }}
+                        {/* Progress bar with mini waveform */}
+                        <div className="relative">
+                            {/* Mini waveform above progress bar when playing */}
+                            {isPlaying && (
+                                <div className="absolute -top-6 left-0 right-0 h-6 overflow-hidden opacity-60 pointer-events-none">
+                                    <Waveform
+                                        isPlaying={isPlaying}
+                                        audioRef={audioRef}
+                                        barCount={80}
+                                        height={24}
+                                        colorScheme="spotify"
+                                    />
+                                </div>
+                            )}
+                            <div
+                                className="h-1 bg-[#4d4d4d] cursor-pointer group relative"
+                                onClick={handleProgressClick}
                             >
-                                {/* Progress handle */}
-                                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" />
-                            </motion.div>
+                                <motion.div
+                                    className="h-full bg-white group-hover:bg-[#1DB954] relative transition-colors"
+                                    style={{ width: `${progress}%` }}
+                                >
+                                    {/* Progress handle */}
+                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" />
+                                </motion.div>
+                            </div>
                         </div>
 
                         <div className="bg-[#181818] border-t border-[#282828]">
@@ -318,7 +336,7 @@ const MusicPlayer = () => {
                             </div>
 
                             {/* Album Art */}
-                            <div className="flex-1 flex items-center justify-center py-6">
+                            <div className="flex-1 flex flex-col items-center justify-center py-6">
                                 <motion.div
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
@@ -349,6 +367,23 @@ const MusicPlayer = () => {
                                             ))}
                                         </div>
                                     )}
+                                </motion.div>
+
+                                {/* Waveform Visualization */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.2 }}
+                                    className="w-full max-w-md mt-8 px-4"
+                                >
+                                    <Waveform
+                                        isPlaying={isPlaying}
+                                        audioRef={audioRef}
+                                        barCount={50}
+                                        height={80}
+                                        colorScheme="spotify"
+                                        className="opacity-90"
+                                    />
                                 </motion.div>
                             </div>
 
