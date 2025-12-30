@@ -15,7 +15,7 @@ import {
     ArrowRight
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
 
 // Debounce hook
 const useDebounce = (value, delay) => {
@@ -306,8 +306,8 @@ const Search = () => {
                                     whileHover={{ scale: 1.05 }}
                                     onClick={() => setActiveCategory(cat)}
                                     className={`px-5 py-2 rounded-full font-medium capitalize whitespace-nowrap transition-all ${activeCategory === cat
-                                            ? 'bg-white text-black'
-                                            : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                                        ? 'bg-white text-black'
+                                        : 'bg-white/10 text-gray-300 hover:bg-white/20'
                                         }`}
                                 >
                                     {cat}
@@ -358,8 +358,8 @@ const Search = () => {
                                                     whileHover={{ scale: 1.01 }}
                                                     onClick={() => playTrack(track, filteredResults.tracks)}
                                                     className={`flex items-center gap-4 p-3 rounded-xl cursor-pointer transition-all group ${currentTrack?.id === track.id
-                                                            ? 'bg-purple-500/20 border border-purple-500/30'
-                                                            : 'bg-white/5 hover:bg-white/10'
+                                                        ? 'bg-purple-500/20 border border-purple-500/30'
+                                                        : 'bg-white/5 hover:bg-white/10'
                                                         }`}
                                                 >
                                                     <div className="relative w-14 h-14 flex-shrink-0">

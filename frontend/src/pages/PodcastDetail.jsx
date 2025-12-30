@@ -17,7 +17,7 @@ import {
     ChevronUp
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
 
 // Category colors
 const categoryColors = {
@@ -243,8 +243,8 @@ const PodcastDetail = () => {
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => setIsLiked(!isLiked)}
                                 className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all ${isLiked
-                                        ? 'bg-pink-500/20 border-pink-500 text-pink-500'
-                                        : 'border-white/20 text-gray-400 hover:text-white hover:border-white/40'
+                                    ? 'bg-pink-500/20 border-pink-500 text-pink-500'
+                                    : 'border-white/20 text-gray-400 hover:text-white hover:border-white/40'
                                     }`}
                             >
                                 <Heart className={`w-5 h-5 ${isLiked ? 'fill-pink-500' : ''}`} />
@@ -299,15 +299,15 @@ const PodcastDetail = () => {
                                     transition={{ delay: index * 0.05 }}
                                     whileHover={{ scale: 1.01 }}
                                     className={`group flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer ${currentTrack?.id === episode.id
-                                            ? 'bg-gradient-to-r from-teal-500/20 to-cyan-500/10 border border-teal-500/30'
-                                            : 'bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10'
+                                        ? 'bg-gradient-to-r from-teal-500/20 to-cyan-500/10 border border-teal-500/30'
+                                        : 'bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10'
                                         }`}
                                     onClick={() => handlePlayEpisode(episode)}
                                 >
                                     {/* Episode Number */}
                                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${currentTrack?.id === episode.id
-                                            ? 'bg-teal-500 text-white'
-                                            : 'bg-white/10 text-gray-400 group-hover:bg-teal-500 group-hover:text-white'
+                                        ? 'bg-teal-500 text-white'
+                                        : 'bg-white/10 text-gray-400 group-hover:bg-teal-500 group-hover:text-white'
                                         }`}>
                                         {isEpisodePlaying(episode.id) ? (
                                             <Pause className="w-5 h-5 fill-white" />

@@ -15,7 +15,7 @@ import {
     Sparkles
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
 
 // Category colors
 const categoryColors = {
@@ -162,8 +162,8 @@ const Podcasts = () => {
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setSelectedCategory('All')}
                                 className={`flex-shrink-0 px-6 py-2.5 rounded-full font-medium transition-all ${selectedCategory === 'All'
-                                        ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-lg shadow-teal-500/30'
-                                        : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
+                                    ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-lg shadow-teal-500/30'
+                                    : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
                                     }`}
                             >
                                 All
@@ -178,8 +178,8 @@ const Podcasts = () => {
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setSelectedCategory(category)}
                                     className={`flex-shrink-0 px-6 py-2.5 rounded-full font-medium transition-all ${selectedCategory === category
-                                            ? `bg-gradient-to-r ${getCategoryColor(category)} text-white shadow-lg`
-                                            : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
+                                        ? `bg-gradient-to-r ${getCategoryColor(category)} text-white shadow-lg`
+                                        : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
                                         }`}
                                 >
                                     {category}

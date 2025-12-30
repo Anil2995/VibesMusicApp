@@ -19,7 +19,7 @@ import {
     GripVertical
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
 
 const PlaylistDetail = () => {
     const { id } = useParams();
@@ -253,8 +253,8 @@ const PlaylistDetail = () => {
                                 whileTap={{ scale: 0.9 }}
                                 onClick={toggleShuffle}
                                 className={`p-3 rounded-full border transition-all ${isShuffled
-                                        ? 'border-purple-500 text-purple-400 bg-purple-500/20'
-                                        : 'border-white/20 text-gray-400 hover:text-white'
+                                    ? 'border-purple-500 text-purple-400 bg-purple-500/20'
+                                    : 'border-white/20 text-gray-400 hover:text-white'
                                     }`}
                             >
                                 <Shuffle className="w-5 h-5" />

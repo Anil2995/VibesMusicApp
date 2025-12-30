@@ -19,7 +19,7 @@ import {
     X
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
 
 const Library = () => {
     const { user } = useAuth();
@@ -187,8 +187,8 @@ const Library = () => {
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setActiveTab(tab)}
                                 className={`px-5 py-2 rounded-full font-medium capitalize transition-all ${activeTab === tab
-                                        ? 'bg-white text-black'
-                                        : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                                    ? 'bg-white text-black'
+                                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
                                     }`}
                             >
                                 {tab === 'liked' ? 'Liked Songs' : tab}
@@ -301,8 +301,8 @@ const Library = () => {
                                     whileHover={{ scale: 1.01 }}
                                     onClick={() => playTrack(track, likedTracks)}
                                     className={`flex items-center gap-4 p-3 rounded-xl cursor-pointer transition-all group ${currentTrack?.id === track.id
-                                            ? 'bg-purple-500/20 border border-purple-500/30'
-                                            : 'bg-white/5 hover:bg-white/10'
+                                        ? 'bg-purple-500/20 border border-purple-500/30'
+                                        : 'bg-white/5 hover:bg-white/10'
                                         }`}
                                 >
                                     <span className="w-6 text-center text-sm text-gray-500 group-hover:hidden">
