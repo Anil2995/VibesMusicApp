@@ -5,7 +5,7 @@
 
 A premium, full-stack music streaming platform designed to deliver a high-fidelity audio experience with a modern, glassmorphism-inspired UI. Built on the **PERN stack**, Vibes Music App bridges the gap between aesthetic excellence and robust functionality, offering real-time audio playback, podcast streaming, and dynamic content discovery.
 
-![Vibes Music App Banner](https://images.unsplash.com/photo-1619983081563-430f63602796?w=1200&auto=format&fit=crop&q=80)
+![Vibes Music App Home](frontend/src/assets/screenshots/home.png)
 
 ---
 
@@ -15,6 +15,16 @@ Vibes Music App was envisioned as a clone of modern high-end streaming services 
 The application serves two primary user bases:
 1.  **Music Lovers**: Who want a sleek, distraction-free environment to discover and play trending tracks.
 2.  **Podcast Listeners**: Who need a dedicated space to consume long-form audio content organized by categories.
+
+---
+
+## 📸 App Interface
+
+<p align="center">
+  <img src="frontend/src/assets/screenshots/podcasts.png" alt="Podcasts Page" width="48%" />
+  &nbsp;
+  <img src="frontend/src/assets/screenshots/library.png" alt="Library Page" width="48%" />
+</p>
 
 ---
 
