@@ -3,7 +3,8 @@ const { createClient } = require('@supabase/supabase-js');
 
 const supabaseUrl = process.env.SUPABASE_URL;
 // Accept both SUPABASE_KEY and SUPABASE_ANON_KEY for flexibility
-const supabaseKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
+// Accept Service Role Key (for admin/seeding) or Anon Key
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
 
 const isValidKey = (key) => key && typeof key === 'string' && key.startsWith('eyJ');
 
