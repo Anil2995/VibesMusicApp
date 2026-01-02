@@ -18,9 +18,15 @@ export const PlayerProvider = ({ children }) => {
     const [repeatMode, setRepeatMode] = useState('none'); // 'none', 'all', 'one'
     const [isVideo, setIsVideo] = useState(false); // Track if current content is video
 
-    // Media refs
-    const audioRef = useRef(new Audio());
+    // Media refs - set crossOrigin for CORS audio support
+    const audioRef = useRef(null);
     const videoRef = useRef(null); // Will be set by VideoPlayer component
+
+    // Initialize audio element on mount
+    if (!audioRef.current) {
+        audioRef.current = new Audio();
+        audioRef.current.crossOrigin = 'anonymous';
+    }
 
     // Get the active media element (audio or video)
     const getActiveMedia = useCallback(() => {
