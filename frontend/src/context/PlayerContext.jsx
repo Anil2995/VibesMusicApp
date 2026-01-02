@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useRef, useEffect } from 'react';
+import { createContext, useContext, useState, useRef, useEffect, useCallback } from 'react';
 
 const PlayerContext = createContext();
 
@@ -16,14 +16,33 @@ export const PlayerProvider = ({ children }) => {
     const [isMuted, setIsMuted] = useState(false);
     const [isShuffled, setIsShuffled] = useState(false);
     const [repeatMode, setRepeatMode] = useState('none'); // 'none', 'all', 'one'
+    const [isVideo, setIsVideo] = useState(false); // Track if current content is video
 
-    // Audio ref
+    // Media refs
     const audioRef = useRef(new Audio());
+    const videoRef = useRef(null); // Will be set by VideoPlayer component
 
-    // Update audio source when track changes
+    // Get the active media element (audio or video)
+    const getActiveMedia = useCallback(() => {
+        if (isVideo && videoRef.current) {
+            return videoRef.current;
+        }
+        return audioRef.current;
+    }, [isVideo]);
+
+    // Set video ref from VideoPlayer component
+    const setVideoRef = useCallback((ref) => {
+        videoRef.current = ref;
+    }, []);
+
+    // Update media source when track changes
     useEffect(() => {
-        const audio = audioRef.current;
-        if (currentTrack?.audio_url) {
+        const hasVideo = currentTrack?.video_url;
+        setIsVideo(!!hasVideo);
+
+        // Only handle audio if not a video track
+        if (!hasVideo && currentTrack?.audio_url) {
+            const audio = audioRef.current;
             audio.src = currentTrack.audio_url;
             audio.load();
             if (isPlaying) {
@@ -32,34 +51,54 @@ export const PlayerProvider = ({ children }) => {
         }
     }, [currentTrack]);
 
-    // Handle volume changes
+    // Handle volume changes for audio
     useEffect(() => {
         audioRef.current.volume = isMuted ? 0 : volume;
+        if (videoRef.current) {
+            videoRef.current.volume = isMuted ? 0 : volume;
+        }
     }, [volume, isMuted]);
+
+    // Sync video element when it's available
+    useEffect(() => {
+        if (isVideo && videoRef.current && currentTrack?.video_url) {
+            videoRef.current.volume = isMuted ? 0 : volume;
+        }
+    }, [isVideo, currentTrack, volume, isMuted]);
 
     // Audio event listeners
     useEffect(() => {
         const audio = audioRef.current;
 
         const handleLoadedMetadata = () => {
-            setDuration(audio.duration);
-        };
-
-        const handleTimeUpdate = () => {
-            setCurrentTime(audio.currentTime);
-        };
-
-        const handleEnded = () => {
-            if (repeatMode === 'one') {
-                audio.currentTime = 0;
-                audio.play().catch(console.error);
-            } else {
-                playNext();
+            if (!isVideo) {
+                setDuration(audio.duration);
             }
         };
 
-        const handlePlay = () => setIsPlaying(true);
-        const handlePause = () => setIsPlaying(false);
+        const handleTimeUpdate = () => {
+            if (!isVideo) {
+                setCurrentTime(audio.currentTime);
+            }
+        };
+
+        const handleEnded = () => {
+            if (!isVideo) {
+                if (repeatMode === 'one') {
+                    audio.currentTime = 0;
+                    audio.play().catch(console.error);
+                } else {
+                    playNext();
+                }
+            }
+        };
+
+        const handlePlay = () => {
+            if (!isVideo) setIsPlaying(true);
+        };
+        const handlePause = () => {
+            if (!isVideo) setIsPlaying(false);
+        };
 
         audio.addEventListener('loadedmetadata', handleLoadedMetadata);
         audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -74,10 +113,48 @@ export const PlayerProvider = ({ children }) => {
             audio.removeEventListener('play', handlePlay);
             audio.removeEventListener('pause', handlePause);
         };
-    }, [repeatMode, playlist, currentIndex]);
+    }, [repeatMode, playlist, currentIndex, isVideo]);
+
+    // Video event handlers - to be called from VideoPlayer component
+    const handleVideoLoadedMetadata = useCallback((videoDuration) => {
+        if (isVideo) {
+            setDuration(videoDuration);
+        }
+    }, [isVideo]);
+
+    const handleVideoTimeUpdate = useCallback((time) => {
+        if (isVideo) {
+            setCurrentTime(time);
+        }
+    }, [isVideo]);
+
+    const handleVideoEnded = useCallback(() => {
+        if (isVideo) {
+            if (repeatMode === 'one' && videoRef.current) {
+                videoRef.current.currentTime = 0;
+                videoRef.current.play().catch(console.error);
+            } else {
+                playNext();
+            }
+        }
+    }, [isVideo, repeatMode]);
+
+    const handleVideoPlay = useCallback(() => {
+        if (isVideo) setIsPlaying(true);
+    }, [isVideo]);
+
+    const handleVideoPause = useCallback(() => {
+        if (isVideo) setIsPlaying(false);
+    }, [isVideo]);
 
     // Play a specific track
     const playTrack = (track, tracks = []) => {
+        // Pause current media before switching
+        audioRef.current.pause();
+        if (videoRef.current) {
+            videoRef.current.pause();
+        }
+
         if (tracks.length > 0) {
             setPlaylist(tracks);
             const index = tracks.findIndex(t => t.id === track.id);
@@ -85,16 +162,22 @@ export const PlayerProvider = ({ children }) => {
         }
         setCurrentTrack(track);
         setIsPlaying(true);
-        audioRef.current.play().catch(console.error);
+
+        // Audio will auto-play in useEffect, video will be handled by VideoPlayer
+        if (!track.video_url) {
+            audioRef.current.play().catch(console.error);
+        }
     };
 
     // Toggle play/pause
     const togglePlay = () => {
-        const audio = audioRef.current;
+        const media = getActiveMedia();
+        if (!media) return;
+
         if (isPlaying) {
-            audio.pause();
+            media.pause();
         } else {
-            audio.play().catch(console.error);
+            media.play().catch(console.error);
         }
     };
 
@@ -117,18 +200,27 @@ export const PlayerProvider = ({ children }) => {
             }
         }
 
+        // Pause current media
+        audioRef.current.pause();
+        if (videoRef.current) {
+            videoRef.current.pause();
+        }
+
         setCurrentIndex(nextIndex);
         setCurrentTrack(playlist[nextIndex]);
-        audioRef.current.play().catch(console.error);
+        setIsPlaying(true);
     };
 
     // Play previous track
     const playPrevious = () => {
         if (playlist.length === 0) return;
 
-        // If more than 3 seconds into the song, restart it
+        // If more than 3 seconds into the content, restart it
         if (currentTime > 3) {
-            audioRef.current.currentTime = 0;
+            const media = getActiveMedia();
+            if (media) {
+                media.currentTime = 0;
+            }
             return;
         }
 
@@ -141,15 +233,24 @@ export const PlayerProvider = ({ children }) => {
             }
         }
 
+        // Pause current media
+        audioRef.current.pause();
+        if (videoRef.current) {
+            videoRef.current.pause();
+        }
+
         setCurrentIndex(prevIndex);
         setCurrentTrack(playlist[prevIndex]);
-        audioRef.current.play().catch(console.error);
+        setIsPlaying(true);
     };
 
     // Seek to position
     const seekTo = (time) => {
-        audioRef.current.currentTime = time;
-        setCurrentTime(time);
+        const media = getActiveMedia();
+        if (media) {
+            media.currentTime = time;
+            setCurrentTime(time);
+        }
     };
 
     // Toggle mute
@@ -190,9 +291,22 @@ export const PlayerProvider = ({ children }) => {
         isMuted,
         isShuffled,
         repeatMode,
+        isVideo,
 
         // Refs
         audioRef,
+        videoRef,
+
+        // Setters
+        setVideoRef,
+        setIsPlaying,
+
+        // Video event handlers
+        handleVideoLoadedMetadata,
+        handleVideoTimeUpdate,
+        handleVideoEnded,
+        handleVideoPlay,
+        handleVideoPause,
 
         // Actions
         playTrack,

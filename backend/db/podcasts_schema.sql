@@ -25,6 +25,8 @@ create table if not exists public.episodes (
   description text,
   duration integer, -- in seconds
   audio_url text not null,
+  video_url text, -- optional video URL for video podcasts
+  thumbnail_url text, -- optional thumbnail for video
   episode_number integer default 1,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

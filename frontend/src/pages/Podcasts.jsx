@@ -14,8 +14,7 @@ import {
     Filter,
     Sparkles
 } from 'lucide-react';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
+import { API_BASE_URL } from '../config/api';
 
 // Category colors
 const categoryColors = {

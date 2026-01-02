@@ -26,8 +26,7 @@ import {
     User
 } from 'lucide-react';
 import TrackCard from '../components/TrackCard';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
+import { API_BASE_URL } from '../config/api';
 
 // Genre color mapping for visual variety
 const genreColors = {
@@ -316,6 +315,7 @@ const Home = () => {
                             {/* Radio Card */}
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
+                                onClick={() => navigate('/radio')}
                                 className="flex items-center gap-4 p-4 bg-gradient-to-r from-purple-500/20 to-violet-500/10 hover:from-purple-500/30 hover:to-violet-500/20 rounded-xl cursor-pointer border border-purple-500/20 transition-all group"
                             >
                                 <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-violet-500 rounded-lg flex items-center justify-center shadow-lg">

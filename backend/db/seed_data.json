@@ -214,5 +214,59 @@
         "duration": 203,
         "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
         "image_url": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300"
+    },
+    {
+        "title": "Night Drive",
+        "artist": "Synthwave Boy",
+        "album": "Neon Dreams",
+        "genre": "Electronic",
+        "duration": 245,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+        "image_url": "https://images.unsplash.com/photo-1549490349-8643362247b5?w=300"
+    },
+    {
+        "title": "Neon Waves",
+        "artist": "Glass Animals",
+        "album": "How To Be A Human Being",
+        "genre": "Electronic",
+        "duration": 218,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+        "image_url": "https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?w=300"
+    },
+    {
+        "title": "Midnight City",
+        "artist": "M83",
+        "album": "Hurry Up, We're Dreaming",
+        "genre": "Electronic",
+        "duration": 243,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
+        "image_url": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=300"
+    },
+    {
+        "title": "Sunset Lover",
+        "artist": "Petit Biscuit",
+        "album": "Presence",
+        "genre": "Electronic",
+        "duration": 195,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
+        "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300"
+    },
+    {
+        "title": "Sunflower",
+        "artist": "Post Malone & Swae Lee",
+        "album": "Spider-Man: Into the Spider-Verse",
+        "genre": "Hip-Hop",
+        "duration": 158,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
+        "image_url": "https://images.unsplash.com/photo-1484876065684-b683cf17d276?w=300"
+    },
+    {
+        "title": "Circles",
+        "artist": "Post Malone",
+        "album": "Hollywood's Bleeding",
+        "genre": "Pop",
+        "duration": 215,
+        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
+        "image_url": "https://images.unsplash.com/photo-1501612780327-45045538702b?w=300"
     }
 ]

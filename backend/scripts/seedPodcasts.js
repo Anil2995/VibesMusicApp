@@ -7,7 +7,7 @@ async function seedPodcasts() {
     try {
         // Clear existing data
         console.log('Clearing existing podcasts and episodes...');
-        await supabase.from('episodes').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+        await supabase.from('podcast_episodes').delete().neq('id', '00000000-0000-0000-0000-000000000000');
         await supabase.from('podcasts').delete().neq('id', '00000000-0000-0000-0000-000000000000');
 
         // Insert podcasts
@@ -39,13 +39,15 @@ async function seedPodcasts() {
                     console.log(`  📝 Adding episode: ${episode.title}`);
 
                     const { error: episodeError } = await supabase
-                        .from('episodes')
+                        .from('podcast_episodes')
                         .insert([{
                             podcast_id: insertedPodcast.id,
                             title: episode.title,
                             description: episode.description,
                             duration: episode.duration,
                             audio_url: episode.audio_url,
+                            video_url: episode.video_url || null,
+                            thumbnail_url: episode.thumbnail_url || null,
                             episode_number: episode.episode_number
                         }]);
 

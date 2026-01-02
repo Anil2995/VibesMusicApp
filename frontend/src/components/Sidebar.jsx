@@ -16,7 +16,8 @@ import {
     ChevronLeft,
     Music2,
     User,
-    TrendingUp
+    TrendingUp,
+    Radio
 } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -38,6 +39,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 
     const discoverItems = [
         { path: '/podcasts', icon: Mic2, label: 'Podcasts' },
+        { path: '/radio', icon: Radio, label: 'Radio', color: 'text-purple-400' },
         { path: '/?genre=trending', icon: TrendingUp, label: 'Trending' },
     ];
 
@@ -54,8 +56,8 @@ const Sidebar = ({ isOpen, onClose }) => {
             <NavLink
                 to={item.path}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${isActive
-                        ? 'bg-white/10 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-white/10 text-white'
+                    : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
             >
                 <item.icon className={`w-5 h-5 flex-shrink-0 ${item.color || ''} ${isActive ? 'text-purple-400' : ''}`} />

@@ -13,6 +13,7 @@ const PodcastDetail = lazy(() => import('./pages/PodcastDetail'));
 const Library = lazy(() => import('./pages/Library'));
 const PlaylistDetail = lazy(() => import('./pages/PlaylistDetail'));
 const Search = lazy(() => import('./pages/Search'));
+const Radio = lazy(() => import('./pages/Radio'));
 
 // Regular imports for always-visible components
 import MusicPlayer from './components/MusicPlayer';
@@ -72,6 +73,9 @@ function App() {
               {/* Podcast Routes */}
               <Route path="/podcasts" element={<Podcasts />} />
               <Route path="/podcasts/:id" element={<PodcastDetail />} />
+
+              {/* Radio Route */}
+              <Route path="/radio" element={<Radio />} />
 
               {/* Auth Routes */}
               <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />

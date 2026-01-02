@@ -18,7 +18,8 @@ import {
     Music2,
     Maximize2,
     Mic2,
-    Radio
+    Radio,
+    Video
 } from 'lucide-react';
 import { useState } from 'react';
 import Waveform from './ui/Waveform';
@@ -35,6 +36,7 @@ const MusicPlayer = () => {
         isMuted,
         isShuffled,
         repeatMode,
+        isVideo,
         togglePlay,
         playNext,
         playPrevious,
@@ -58,6 +60,8 @@ const MusicPlayer = () => {
 
     const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
     const isPodcast = currentTrack.isPodcast;
+    const isVideoPodcast = currentTrack.isVideoPodcast || isVideo;
+    const isRadio = currentTrack.isRadio || currentTrack.isLive;
 
     const handleProgressClick = (e) => {
         const bar = e.currentTarget;
@@ -139,8 +143,18 @@ const MusicPlayer = () => {
                                                 className="w-14 h-14 rounded-lg object-cover shadow-lg"
                                             />
                                             {isPodcast && (
-                                                <div className="absolute -top-1 -right-1 w-5 h-5 bg-teal-500 rounded-full flex items-center justify-center">
-                                                    <Mic2 className="w-3 h-3 text-white" />
+                                                <div className={`absolute -top-1 -right-1 w-5 h-5 ${isVideoPodcast ? 'bg-purple-500' : 'bg-teal-500'} rounded-full flex items-center justify-center`}>
+                                                    {isVideoPodcast ? (
+                                                        <Video className="w-3 h-3 text-white" />
+                                                    ) : (
+                                                        <Mic2 className="w-3 h-3 text-white" />
+                                                    )}
+                                                </div>
+                                            )}
+                                            {isRadio && (
+                                                <div className="absolute -top-1 -right-1 flex items-center gap-0.5 px-1.5 py-0.5 bg-red-500 rounded-full">
+                                                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                                                    <span className="text-[8px] font-bold text-white">LIVE</span>
                                                 </div>
                                             )}
                                         </motion.div>
@@ -498,9 +512,18 @@ const MusicPlayer = () => {
                             <div className="flex items-center justify-between pb-8">
                                 <div className="flex items-center gap-4">
                                     {isPodcast && (
-                                        <div className="flex items-center gap-2 text-teal-400">
-                                            <Mic2 className="w-5 h-5" />
-                                            <span className="text-sm font-medium">Podcast</span>
+                                        <div className={`flex items-center gap-2 ${isVideoPodcast ? 'text-purple-400' : 'text-teal-400'}`}>
+                                            {isVideoPodcast ? (
+                                                <>
+                                                    <Video className="w-5 h-5" />
+                                                    <span className="text-sm font-medium">Video Podcast</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Mic2 className="w-5 h-5" />
+                                                    <span className="text-sm font-medium">Podcast</span>
+                                                </>
+                                            )}
                                         </div>
                                     )}
                                 </div>

@@ -33,7 +33,7 @@ const getPodcastById = async (req, res) => {
 
         // Get episodes for this podcast
         const { data: episodes, error: episodesError } = await supabase
-            .from('episodes')
+            .from('podcast_episodes')
             .select('*')
             .eq('podcast_id', id)
             .order('episode_number', { ascending: true });
@@ -53,7 +53,7 @@ const getEpisodesByPodcastId = async (req, res) => {
         const { id } = req.params;
 
         const { data: episodes, error } = await supabase
-            .from('episodes')
+            .from('podcast_episodes')
             .select('*')
             .eq('podcast_id', id)
             .order('episode_number', { ascending: true });
@@ -89,7 +89,7 @@ const createPodcast = async (req, res) => {
             }));
 
             const { error: episodesError } = await supabase
-                .from('episodes')
+                .from('podcast_episodes')
                 .insert(episodesData);
 
             if (episodesError) throw episodesError;

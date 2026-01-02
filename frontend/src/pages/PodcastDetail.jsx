@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePlayer } from '../context/PlayerContext';
+import VideoPlayer from '../components/ui/VideoPlayer';
 import {
     ArrowLeft,
     Play,
@@ -14,10 +15,11 @@ import {
     Headphones,
     ListMusic,
     ChevronDown,
-    ChevronUp
+    ChevronUp,
+    Video,
+    Mic2
 } from 'lucide-react';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://vibes-music-api.onrender.com/api';
+import { API_BASE_URL } from '../config/api';
 
 // Category colors
 const categoryColors = {
@@ -33,12 +35,14 @@ const categoryColors = {
 const PodcastDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { playTrack, currentTrack, isPlaying, togglePlay } = usePlayer();
+    const { playTrack, currentTrack, isPlaying, togglePlay, isVideo } = usePlayer();
     const [podcast, setPodcast] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
     const [showAllEpisodes, setShowAllEpisodes] = useState(false);
+    const [showVideoPlayer, setShowVideoPlayer] = useState(false);
+    const [currentVideoEpisode, setCurrentVideoEpisode] = useState(null);
 
     useEffect(() => {
         fetchPodcast();
@@ -71,6 +75,12 @@ const PodcastDetail = () => {
     };
 
     const handlePlayEpisode = (episode) => {
+        // Check if this episode has a video
+        if (episode.video_url) {
+            setCurrentVideoEpisode(episode);
+            setShowVideoPlayer(true);
+        }
+
         const track = {
             id: episode.id,
             title: episode.title,
@@ -79,16 +89,26 @@ const PodcastDetail = () => {
             genre: podcast.category,
             duration: episode.duration,
             audio_url: episode.audio_url,
-            image_url: podcast.image_url,
-            isPodcast: true
+            video_url: episode.video_url || null,
+            thumbnail_url: episode.thumbnail_url || null,
+            image_url: episode.thumbnail_url || podcast.image_url,
+            isPodcast: true,
+            isVideoPodcast: !!episode.video_url
         };
+
         playTrack(track, podcast.episodes.map(ep => ({
             ...ep,
+            id: ep.id,
+            title: ep.title,
             artist: podcast.host,
             album: podcast.title,
             genre: podcast.category,
-            image_url: podcast.image_url,
-            isPodcast: true
+            audio_url: ep.audio_url,
+            video_url: ep.video_url || null,
+            thumbnail_url: ep.thumbnail_url || null,
+            image_url: ep.thumbnail_url || podcast.image_url,
+            isPodcast: true,
+            isVideoPodcast: !!ep.video_url
         })));
     };
 
@@ -96,7 +116,17 @@ const PodcastDetail = () => {
         return currentTrack?.id === episodeId && isPlaying;
     };
 
+    const isEpisodeActive = (episodeId) => {
+        return currentTrack?.id === episodeId;
+    };
+
     const displayedEpisodes = showAllEpisodes ? podcast?.episodes : podcast?.episodes?.slice(0, 5);
+
+    // Close video player
+    const handleCloseVideoPlayer = () => {
+        setShowVideoPlayer(false);
+        setCurrentVideoEpisode(null);
+    };
 
     // Loading skeleton
     if (loading) {
@@ -135,6 +165,9 @@ const PodcastDetail = () => {
         );
     }
 
+    // Check if podcast has any video episodes
+    const hasVideoEpisodes = podcast.episodes?.some(ep => ep.video_url);
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white pb-32">
             {/* Background gradient based on category */}
@@ -142,6 +175,47 @@ const PodcastDetail = () => {
                 <div className={`absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br ${getCategoryColor(podcast.category)} rounded-full mix-blend-multiply filter blur-3xl opacity-20`} />
                 <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10" />
             </div>
+
+            {/* Video Player Modal */}
+            <AnimatePresence>
+                {showVideoPlayer && currentVideoEpisode && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="w-full max-w-5xl"
+                        >
+                            <VideoPlayer
+                                videoUrl={currentVideoEpisode.video_url}
+                                poster={currentVideoEpisode.thumbnail_url || podcast.image_url}
+                                title={`${podcast.title} - ${currentVideoEpisode.title}`}
+                                onClose={handleCloseVideoPlayer}
+                            />
+
+                            {/* Episode info below video */}
+                            <div className="mt-6 bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+                                <div className="flex items-start gap-4">
+                                    <div className="flex-1">
+                                        <span className="text-sm text-teal-400 font-medium">Episode {currentVideoEpisode.episode_number}</span>
+                                        <h3 className="text-xl font-bold text-white mt-1">{currentVideoEpisode.title}</h3>
+                                        <p className="text-gray-400 mt-2">{currentVideoEpisode.description}</p>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-gray-400">
+                                        <Clock className="w-4 h-4" />
+                                        <span>{formatDuration(currentVideoEpisode.duration)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Header with back button */}
             <header className="sticky top-0 z-30 border-b border-white/10 backdrop-blur-xl bg-black/40">
@@ -174,12 +248,18 @@ const PodcastDetail = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         className="flex-shrink-0"
                     >
-                        <div className="w-64 h-64 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+                        <div className="w-64 h-64 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 relative">
                             <img
                                 src={podcast.image_url}
                                 alt={podcast.title}
                                 className="w-full h-full object-cover"
                             />
+                            {hasVideoEpisodes && (
+                                <div className="absolute top-3 right-3 bg-teal-500 text-white px-2 py-1 rounded-lg flex items-center gap-1 text-xs font-semibold">
+                                    <Video className="w-3 h-3" />
+                                    VIDEO
+                                </div>
+                            )}
                         </div>
                     </motion.div>
 
@@ -270,6 +350,12 @@ const PodcastDetail = () => {
                                 <ListMusic className="w-4 h-4" />
                                 <span>{podcast.episodes?.length || 0} Episodes</span>
                             </div>
+                            {hasVideoEpisodes && (
+                                <div className="flex items-center gap-2 text-teal-400">
+                                    <Video className="w-4 h-4" />
+                                    <span>Video Available</span>
+                                </div>
+                            )}
                             <div className="flex items-center gap-2">
                                 <Headphones className="w-4 h-4" />
                                 <span>Free to listen</span>
@@ -298,31 +384,53 @@ const PodcastDetail = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.05 }}
                                     whileHover={{ scale: 1.01 }}
-                                    className={`group flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer ${currentTrack?.id === episode.id
+                                    className={`group flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer ${isEpisodeActive(episode.id)
                                         ? 'bg-gradient-to-r from-teal-500/20 to-cyan-500/10 border border-teal-500/30'
                                         : 'bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10'
                                         }`}
                                     onClick={() => handlePlayEpisode(episode)}
                                 >
-                                    {/* Episode Number */}
-                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${currentTrack?.id === episode.id
+                                    {/* Episode Thumbnail or Number */}
+                                    <div className={`relative w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all overflow-hidden ${isEpisodeActive(episode.id)
                                         ? 'bg-teal-500 text-white'
                                         : 'bg-white/10 text-gray-400 group-hover:bg-teal-500 group-hover:text-white'
                                         }`}>
-                                        {isEpisodePlaying(episode.id) ? (
+                                        {episode.video_url && episode.thumbnail_url ? (
+                                            <img
+                                                src={episode.thumbnail_url}
+                                                alt=""
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : isEpisodePlaying(episode.id) ? (
                                             <Pause className="w-5 h-5 fill-white" />
                                         ) : (
-                                            <span className="font-bold group-hover:hidden">{episode.episode_number}</span>
+                                            <>
+                                                <span className="font-bold group-hover:hidden">{episode.episode_number}</span>
+                                                <Play className="w-5 h-5 fill-white hidden group-hover:block" />
+                                            </>
                                         )}
-                                        <Play className="w-5 h-5 fill-white hidden group-hover:block" />
+
+                                        {/* Video badge */}
+                                        {episode.video_url && (
+                                            <div className="absolute bottom-0 right-0 bg-teal-500 p-0.5 rounded-tl">
+                                                <Video className="w-2.5 h-2.5 text-white" />
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Episode Info */}
                                     <div className="flex-1 min-w-0">
-                                        <h3 className={`font-semibold truncate transition-colors ${currentTrack?.id === episode.id ? 'text-teal-400' : 'group-hover:text-teal-400'
-                                            }`}>
-                                            {episode.title}
-                                        </h3>
+                                        <div className="flex items-center gap-2">
+                                            <h3 className={`font-semibold truncate transition-colors ${isEpisodeActive(episode.id) ? 'text-teal-400' : 'group-hover:text-teal-400'
+                                                }`}>
+                                                {episode.title}
+                                            </h3>
+                                            {episode.video_url && (
+                                                <span className="flex-shrink-0 text-[10px] font-bold bg-teal-500/20 text-teal-400 px-1.5 py-0.5 rounded">
+                                                    VIDEO
+                                                </span>
+                                            )}
+                                        </div>
                                         <p className="text-sm text-gray-400 truncate">
                                             {episode.description}
                                         </p>
@@ -335,7 +443,7 @@ const PodcastDetail = () => {
                                     </div>
 
                                     {/* Playing indicator */}
-                                    {currentTrack?.id === episode.id && isPlaying && (
+                                    {isEpisodePlaying(episode.id) && (
                                         <div className="flex items-end gap-0.5 h-4">
                                             {[...Array(3)].map((_, i) => (
                                                 <motion.div

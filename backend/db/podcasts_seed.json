@@ -11,6 +11,8 @@
                 "description": "Exploring how AI will shape our lives and work in the coming year",
                 "duration": 1845,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 1
             },
             {
@@ -18,6 +20,8 @@
                 "description": "Latest frameworks and tools that are changing the web landscape",
                 "duration": 2100,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 2
             },
             {
@@ -41,6 +45,8 @@
                 "description": "Start your day with clarity and positive energy",
                 "duration": 1200,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 1
             },
             {
@@ -71,6 +77,8 @@
                 "description": "Key lessons from founders who made it big",
                 "duration": 2400,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 1
             },
             {
@@ -101,6 +109,8 @@
                 "description": "Getting started with creating your first beats",
                 "duration": 1650,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 1
             },
             {
@@ -108,6 +118,8 @@
                 "description": "Professional mixing techniques for crystal clear sound",
                 "duration": 2100,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 2
             },
             {
@@ -131,6 +143,8 @@
                 "description": "The funniest workplace mishaps and stories",
                 "duration": 1500,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1543965170-4c01a586684e?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 1
             },
             {
@@ -144,7 +158,7 @@
     },
     {
         "title": "True Crime Files",
-        "host": "Detective noir",
+        "host": "Detective Noir",
         "description": "Deep dives into mysterious cases, unsolved crimes, and the stories behind them.",
         "category": "True Crime",
         "image_url": "https://images.unsplash.com/photo-1453873531674-2151bcd01707?w=500&auto=format&fit=crop&q=60",
@@ -154,6 +168,8 @@
                 "description": "A person disappears without a trace - what happened?",
                 "duration": 2700,
                 "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                "video_url": "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+                "thumbnail_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&auto=format&fit=crop&q=60",
                 "episode_number": 1
             },
             {

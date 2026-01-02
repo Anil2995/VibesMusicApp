@@ -51,7 +51,9 @@ To design and develop a production-ready music streaming web application demonst
 |---------|-------------|
 | 🔐 **Authentication** | Secure signup/login with Supabase Auth |
 | 🎵 **Music Streaming** | Browse and stream music tracks |
+| 📻 **Live Radio** | Stream live radio stations across genres |
 | 🎙️ **Podcasts** | Discover and listen to podcast episodes |
+| 📹 **Video Podcasts** | Watch video podcast content with full controls |
 | 🔍 **Search** | Search tracks, artists, and podcasts |
 | 📚 **Playlists** | Create and manage custom playlists |
 | ❤️ **Favorites** | Like and save favorite tracks |
