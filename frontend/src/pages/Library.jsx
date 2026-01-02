@@ -26,6 +26,7 @@ const Library = () => {
     const navigate = useNavigate();
     const [playlists, setPlaylists] = useState([]);
     const [likedTracks, setLikedTracks] = useState([]);
+    const [recentlyPlayed, setRecentlyPlayed] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('playlists');
     const [showCreateModal, setShowCreateModal] = useState(false);
@@ -36,10 +37,20 @@ const Library = () => {
         if (user) {
             fetchPlaylists();
             fetchLikedTracks();
+            fetchRecentlyPlayed();
         } else {
             setLoading(false);
         }
     }, [user]);
+
+    // Handle URL query params for tabs
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const tab = params.get('tab');
+        if (tab && ['playlists', 'liked', 'recent'].includes(tab)) {
+            setActiveTab(tab);
+        }
+    }, [window.location.search]);
 
     const fetchPlaylists = async () => {
         try {
@@ -64,6 +75,18 @@ const Library = () => {
             console.error('Error fetching liked tracks:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchRecentlyPlayed = async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/history/recent/${user.id}`);
+            if (response.ok) {
+                const data = await response.json();
+                setRecentlyPlayed(data);
+            }
+        } catch (error) {
+            console.error('Error fetching recently played:', error);
         }
     };
 
@@ -179,7 +202,7 @@ const Library = () => {
 
                     {/* Tabs */}
                     <div className="flex gap-2 mt-6">
-                        {['playlists', 'liked'].map((tab) => (
+                        {['playlists', 'liked', 'recent'].map((tab) => (
                             <motion.button
                                 key={tab}
                                 whileHover={{ scale: 1.05 }}
@@ -190,7 +213,7 @@ const Library = () => {
                                     : 'bg-white/10 text-gray-300 hover:bg-white/20'
                                     }`}
                             >
-                                {tab === 'liked' ? 'Liked Songs' : tab}
+                                {tab === 'liked' ? 'Liked Songs' : tab === 'recent' ? 'Recently Played' : tab}
                             </motion.button>
                         ))}
                     </div>
@@ -279,8 +302,7 @@ const Library = () => {
                             ))
                         )}
                     </div>
-                ) : (
-                    /* Liked Songs Tab */
+                ) : activeTab === 'liked' ? (
                     <div className="space-y-2">
                         {likedTracks.length === 0 ? (
                             <div className="text-center py-16">
@@ -329,6 +351,60 @@ const Library = () => {
                                     <span className="text-sm text-gray-500">{track.genre}</span>
                                     <span className="text-sm text-gray-500 hidden md:block">
                                         {formatDate(track.liked_at)}
+                                    </span>
+                                </motion.div>
+                            ))
+                        )}
+                    </div>
+                ) : (
+                    <div className="space-y-2">
+                        {recentlyPlayed.length === 0 ? (
+                            <div className="text-center py-16">
+                                <div className="w-20 h-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Clock className="w-10 h-10 text-amber-400" />
+                                </div>
+                                <h3 className="text-xl font-semibold mb-2">No listening history</h3>
+                                <p className="text-gray-400">Songs you play will appear here</p>
+                            </div>
+                        ) : (
+                            recentlyPlayed.map((track, index) => (
+                                <motion.div
+                                    key={`${track.id}-${index}`}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.03 }}
+                                    whileHover={{ scale: 1.01 }}
+                                    onClick={() => playTrack(track, recentlyPlayed)}
+                                    className={`flex items-center gap-4 p-3 rounded-xl cursor-pointer transition-all group ${currentTrack?.id === track.id
+                                        ? 'bg-purple-500/20 border border-purple-500/30'
+                                        : 'bg-white/5 hover:bg-white/10'
+                                        }`}
+                                >
+                                    <span className="w-6 text-center text-sm text-gray-500 group-hover:hidden">
+                                        {index + 1}
+                                    </span>
+                                    <span className="w-6 text-center hidden group-hover:block">
+                                        {currentTrack?.id === track.id && isPlaying ? (
+                                            <Pause className="w-4 h-4 text-purple-400" />
+                                        ) : (
+                                            <Play className="w-4 h-4 text-white fill-white" />
+                                        )}
+                                    </span>
+                                    <img
+                                        src={track.image_url}
+                                        alt={track.title}
+                                        className="w-12 h-12 rounded-lg object-cover"
+                                    />
+                                    <div className="flex-1 min-w-0">
+                                        <h4 className={`font-medium truncate ${currentTrack?.id === track.id ? 'text-purple-400' : ''
+                                            }`}>
+                                            {track.title}
+                                        </h4>
+                                        <p className="text-sm text-gray-400 truncate">{track.artist}</p>
+                                    </div>
+                                    <span className="text-sm text-gray-500">{track.genre}</span>
+                                    <span className="text-sm text-gray-500 hidden md:block">
+                                        {track.played_at ? formatDate(track.played_at) : ''}
                                     </span>
                                 </motion.div>
                             ))

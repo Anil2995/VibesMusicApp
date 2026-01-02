@@ -57,6 +57,7 @@ To design and develop a production-ready music streaming web application demonst
 | 🔍 **Search** | Search tracks, artists, and podcasts |
 | 📚 **Playlists** | Create and manage custom playlists |
 | ❤️ **Favorites** | Like and save favorite tracks |
+| 🕒 **History** | View recently played tracks |
 | ⏯️ **Resume Playback** | Continue from last played position |
 | 📱 **Responsive** | Works on desktop and mobile devices |
 

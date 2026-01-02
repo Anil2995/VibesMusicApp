@@ -1,9 +1,58 @@
 import { motion } from 'framer-motion';
 import { Play, Pause, Heart } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 const TrackCard = ({ track, index, onPlay, isPlaying }) => {
+    const { user } = useAuth();
     const [isLiked, setIsLiked] = useState(false);
+    const [processing, setProcessing] = useState(false);
+
+    useEffect(() => {
+        if (user && track) {
+            checkLikeStatus();
+        }
+    }, [user, track]);
+
+    const checkLikeStatus = async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/history/liked/${user.id}/${track.id}/check`);
+            if (response.ok) {
+                const data = await response.json();
+                setIsLiked(data.liked);
+            }
+        } catch (error) {
+            console.error('Error checking like status:', error);
+        }
+    };
+
+    const toggleLike = async (e) => {
+        e.stopPropagation();
+        if (!user) return; // TODO: Show login prompt
+        if (processing) return;
+
+        setProcessing(true);
+        try {
+            if (isLiked) {
+                const response = await fetch(`${API_BASE_URL}/history/liked/${user.id}/${track.id}`, {
+                    method: 'DELETE'
+                });
+                if (response.ok) setIsLiked(false);
+            } else {
+                const response = await fetch(`${API_BASE_URL}/history/liked`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: user.id, track_id: track.id })
+                });
+                if (response.ok) setIsLiked(true);
+            }
+        } catch (error) {
+            console.error('Error toggling like:', error);
+        } finally {
+            setProcessing(false);
+        }
+    };
 
     const formatDuration = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -31,8 +80,8 @@ const TrackCard = ({ track, index, onPlay, isPlaying }) => {
                 {/* Play Button - Spotify Style */}
                 <motion.div
                     className={`absolute bottom-2 right-2 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 ${isPlaying
-                            ? 'bg-[#1DB954] opacity-100 translate-y-0'
-                            : 'bg-[#1DB954] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0'
+                        ? 'bg-[#1DB954] opacity-100 translate-y-0'
+                        : 'bg-[#1DB954] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0'
                         }`}
                     whileHover={{ scale: 1.06 }}
                 >
@@ -47,13 +96,11 @@ const TrackCard = ({ track, index, onPlay, isPlaying }) => {
                 <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setIsLiked(!isLiked);
-                    }}
+                    onClick={toggleLike}
+                    disabled={processing}
                     className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm transition-all duration-300 ${isLiked
-                            ? 'bg-[#1DB954]/80 opacity-100'
-                            : 'bg-black/60 opacity-0 group-hover:opacity-100'
+                        ? 'bg-[#1DB954]/80 opacity-100'
+                        : 'bg-black/60 opacity-0 group-hover:opacity-100'
                         }`}
                 >
                     <Heart className={`w-4 h-4 transition-colors ${isLiked ? 'text-white fill-white' : 'text-white'

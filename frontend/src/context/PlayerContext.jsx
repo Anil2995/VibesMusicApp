@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useRef, useEffect, useCallback } from 'react';
+import { useAuth } from './AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 const PlayerContext = createContext();
 
 export const PlayerProvider = ({ children }) => {
+    const { user } = useAuth();
     // Track state
     const [currentTrack, setCurrentTrack] = useState(null);
     const [playlist, setPlaylist] = useState([]);
@@ -56,6 +59,23 @@ export const PlayerProvider = ({ children }) => {
             }
         }
     }, [currentTrack]);
+
+    // Record history when track changes
+    useEffect(() => {
+        if (currentTrack && user) {
+            // Add to listening history
+            fetch(`${API_BASE_URL}/history/recent`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    user_id: user.id,
+                    track_id: currentTrack.id,
+                    play_duration: 0,
+                    completed: false
+                })
+            }).catch(err => console.error('Error adding to history:', err));
+        }
+    }, [currentTrack?.id]); // Only trigger when track ID changes
 
     // Handle volume changes for audio
     useEffect(() => {

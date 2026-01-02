@@ -5,15 +5,21 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 let supabaseInstance = null;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-    console.error("Missing Supabase URL or Anon Key. Please check your .env file.")
+const isValidKey = (key) => key && typeof key === 'string' && key.startsWith('eyJ');
+
+if (!supabaseUrl || !isValidKey(supabaseAnonKey)) {
+    console.error("Supabase Configuration Error:");
+    if (!supabaseUrl) console.error("- Missing VITE_SUPABASE_URL in .env");
+    if (!supabaseAnonKey) console.error("- Missing VITE_SUPABASE_ANON_KEY in .env");
+    else if (!isValidKey(supabaseAnonKey)) console.error(`- VITE_SUPABASE_ANON_KEY does not look like a valid JWT (should start with 'eyJ'). Found: ${supabaseAnonKey.substring(0, 10)}...`);
+
     // Return a dummy object to prevent immediate crash, functionality will obviously fail but UI renders
     supabaseInstance = {
         auth: {
             getSession: () => Promise.resolve({ data: { session: null } }),
             onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => { } } } }),
-            signInWithPassword: () => Promise.resolve({ error: { message: "Supabase keys missing. Check console." } }),
-            signUp: () => Promise.resolve({ error: { message: "Supabase keys missing. Check console." } }),
+            signInWithPassword: () => Promise.resolve({ error: { message: "Invalid Supabase Configuration. Check console." } }),
+            signUp: () => Promise.resolve({ error: { message: "Invalid Supabase Configuration. Check console." } }),
             signOut: () => Promise.resolve({ error: null })
         },
         from: () => ({
